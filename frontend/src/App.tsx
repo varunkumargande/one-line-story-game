@@ -8,10 +8,12 @@ import Navigation from "./components/Navigation";
 import { ThemeProvider } from "./context/ThemeContext";
 import NotFound from "pages/404";
 
+import "./i18n";
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen relative max-w-screen-2xl mx-auto">
+      <div className="min-h-screen relative max-w-screen-2xl mx-auto text-black dark:text-sky-400 pt-24 px-8 pb-8">
         <Router>
           <Navigation />
           <Routes>

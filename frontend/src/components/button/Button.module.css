@@ -1,0 +1,14 @@
+.neumorphicBtnLight {
+  border-radius: 12px;
+  background: #f0f0f0;
+  box-shadow: 3px 3px 12px #cacaca,
+    -3px -3px 12px #ffffff;
+}
+
+.neumorphicBtnDark {
+  border-radius: 12px;
+  background: #2c2c2c;
+  box-shadow: 3px 3px 12px #252525,
+    -3px -3px 12px #333333;
+
+}
