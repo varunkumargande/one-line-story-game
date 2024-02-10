@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 const PORT = 8000;
@@ -12,6 +13,13 @@ app.use(bodyParser.json());
 
 // Routes
 const routes = require("./routes/index");
+app.use(
+  cors({
+    origin: ["https://one-line-story-game-xe4k.vercel.app/"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use("/", routes);
 
 mongoose
