@@ -6,12 +6,14 @@ import { useTheme } from "context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import Globe from "./svgs/Globe";
 import Button from "./button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ConfigRoutes } from "config/routes.config";
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const { i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -42,12 +44,15 @@ const Navigation: React.FC = () => {
   return (
     <header>
       <nav
-        className="fixed top-0 left-0 right-0 mx-auto flex max-w-screen-2xl items-center justify-between py-6 lg:px-4 z-30 light-nav dark:dark-nav"
+        className="fixed nav top-0 left-0 right-0 mx-auto flex max-w-screen-2xl items-center justify-between py-6 lg:px-4 z-30"
         aria-label="Global"
       >
         <div className="flex lg:flex-1 px-3">
           {location.pathname !== "/" && (
-            <a rel="canonical" href="/" className="-m-1.5 p-1.5">
+            <div
+              onClick={() => navigate(ConfigRoutes.HOME)}
+              className="-m-1.5 p-1.5"
+            >
               <span className="sr-only">{Company}</span>
               <img
                 className="shadow-md"
@@ -56,7 +61,7 @@ const Navigation: React.FC = () => {
                 src={"/logo.png"}
                 alt={Company}
               />
-            </a>
+            </div>
           )}
         </div>
         <div className="flex">

@@ -41,7 +41,7 @@ const Home: React.FC = () => {
             image="/multiplayer.png"
             showInstructions={() => setIsModalOpen("multiplayer")}
             onClick={() =>
-              navigate(ConfigRoutes.STORIES.replace(":id", "multiplayer"))
+              navigate(ConfigRoutes.STORIES.replace(":type", "multiplayer"))
             }
           />
         }
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
             image="/play-with-bot.png"
             showInstructions={() => setIsModalOpen("play-with-bot")}
             onClick={() =>
-              navigate(ConfigRoutes.STORIES.replace(":id", "play-with-bot"))
+              navigate(ConfigRoutes.STORIES.replace(":type", "play-with-bot"))
             }
           />
         }

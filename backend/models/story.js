@@ -29,6 +29,14 @@ const storySchema = new mongoose.Schema({
       ref: "Player",
     },
   ],
+  is_multi_player: {
+    type: Boolean,
+    required: true,
+  },
+  topic: {
+    type: String,
+    minLength: 3,
+  },
 });
 
 // Pre-hook to remove associated content and players when a story is deleted

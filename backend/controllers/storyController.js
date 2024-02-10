@@ -16,13 +16,11 @@ const storyController = {
       const storyId = req.params.id;
 
       // Find the story and populate the 'players' field
-      const story = await Story.findById(storyId).populate({
+      const story = await Story.findById(storyId);
+      await story.populate({
         path: "players",
         select: "name",
-      });
-
-      const players = await Player.find({ story: story.id }).select("name");
-      story.players = players;
+      }).exec;
 
       // Check if the story exists
       if (!story) {
@@ -40,8 +38,7 @@ const storyController = {
   listStories: async (req, res) => {
     try {
       // Fetch all stories from the database
-      const stories = await Story.find().populate("players");
-
+      const stories = await Story.find().populate("players").exec;
       // Respond with the list of stories
       res.status(200).json(stories);
     } catch (error) {
@@ -81,7 +78,7 @@ const storyController = {
 
   getFilteredStories: async (req, res) => {
     try {
-      const { end_game, start_game } = req.query;
+      const { end_game, start_game, is_multi_player } = req.query;
       let query = {};
 
       // Check if end_game query parameter is provided
@@ -94,6 +91,11 @@ const storyController = {
         query.start_game = start_game.toLowerCase() === "true";
       }
 
+      // Check if is_multi_player query parameter is provided
+      if (is_multi_player !== undefined) {
+        query.is_multi_player = is_multi_player.toLowerCase() === "true";
+      }
+
       let stories;
 
       // Apply filters
@@ -102,6 +104,16 @@ const storyController = {
       } else {
         stories = await Story.find();
       }
+
+      const populatePromises = stories.map(
+        async (story) =>
+          await story.populate({
+            path: "players",
+            select: "name",
+          }).exec
+      );
+
+      await Promise.all(populatePromises);
 
       res.json(stories);
     } catch (error) {
