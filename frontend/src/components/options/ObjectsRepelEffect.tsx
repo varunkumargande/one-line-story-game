@@ -48,7 +48,7 @@ export const ObjectsRepelEffect: ISourceOptions = {
       density: {
         enable: true,
       },
-      value: 140,
+      value: 180,
     },
     opacity: {
       value: 0.5,
