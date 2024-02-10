@@ -6,10 +6,12 @@ import { useTheme } from "context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import Globe from "./svgs/Globe";
 import Button from "./button";
+import { useLocation } from "react-router-dom";
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const { i18n } = useTranslation();
+  const location = useLocation();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -44,16 +46,18 @@ const Navigation: React.FC = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1 px-3">
-          <a rel="canonical" href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">{Company}</span>
-            <img
-              className="shadow-md"
-              width={65}
-              height={65}
-              src={"/logo.png"}
-              alt={Company}
-            />
-          </a>
+          {location.pathname !== "/" && (
+            <a rel="canonical" href="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">{Company}</span>
+              <img
+                className="shadow-md"
+                width={65}
+                height={65}
+                src={"/logo.png"}
+                alt={Company}
+              />
+            </a>
+          )}
         </div>
         <div className="flex">
           <div className="flex items-center mr-3">
@@ -63,18 +67,18 @@ const Navigation: React.FC = () => {
                 type="checkbox"
                 value=""
                 className="sr-only peer"
-                checked={i18n.language === "en"}
+                checked={i18n.language !== "de"}
                 onChange={() => {
-                  changeLanguage(i18n.language !== "en" ? "en" : "de");
+                  changeLanguage(i18n.language === "de" ? "en" : "de");
                 }}
               />
               <div
                 className={`${
-                  i18n.language !== "en" && "justify-end"
+                  i18n.language === "de" && "justify-end"
                 } px-[6px] flex w-14 h-8 text-black items-center dark:text-white bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#09d3abe9] dark:peer-focus:ring-[#d2c73650] rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all dark:border-gray-600`}
               >
                 <span className="my-auto">
-                  {i18n.language === "en" ? "DE" : "EN"}
+                  {i18n.language !== "de" ? "DE" : "EN"}
                 </span>
               </div>
             </label>

@@ -1,14 +1,15 @@
 // src/App.tsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ConfigRoutes } from "config/routes.config";
 import Home from "./pages/Home";
 import MultiPlayer from "./pages/MultiPlayer";
 import PlayWithBot from "./pages/PlayWithBot";
 import Navigation from "./components/Navigation";
 import { ThemeProvider } from "./context/ThemeContext";
-import NotFound from "pages/404";
-
 import "./i18n";
+import NotFound from "pages/404";
+import Stories from "pages/Stories";
 
 const App: React.FC = () => {
   return (
@@ -17,11 +18,15 @@ const App: React.FC = () => {
         <Router>
           <Navigation />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/multi-player" element={<MultiPlayer />} />
-            <Route path="/play-with-bot" element={<PlayWithBot />} />
+            <Route path={ConfigRoutes.HOME} element={<Home />} />
+            <Route path={ConfigRoutes.MULTI_PLAYER} element={<MultiPlayer />} />
+            <Route
+              path={ConfigRoutes.PLAY_WITH_BOT}
+              element={<PlayWithBot />}
+            />
+            <Route path={ConfigRoutes.STORIES} element={<Stories />} />
             {/* Wildcard route for 404 - Not Found */}
-            <Route path="*" element={<NotFound />} />
+            <Route path={ConfigRoutes.NOT_FOUND} element={<NotFound />} />
           </Routes>
         </Router>
       </div>

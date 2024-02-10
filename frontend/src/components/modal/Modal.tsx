@@ -1,33 +1,35 @@
 // Modal.tsx
 
+import { useContentfulMediaTranslations } from "hooks/useContentfulMediaTranslations";
 import React, { ReactNode, useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  title: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const handleEscapeKey = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      onClose();
-    }
-  };
-
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
+  const { t } = useContentfulMediaTranslations();
   useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
     if (isOpen) {
       document.addEventListener("keydown", handleEscapeKey);
       return () => {
         document.removeEventListener("keydown", handleEscapeKey);
       };
     }
-  }, [handleEscapeKey, isOpen]);
+  }, [isOpen, onClose]);
 
   return isOpen ? (
     <>
       <div
-        className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[#00000095]"
         onClick={onClose}
       >
         <div
@@ -39,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         >
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-              <h3 className="text-3xl font=semibold">General Info</h3>
+              <h3 className="text-3xl font=semibold">{title}</h3>
               <button
                 className="bg-transparent border-0 text-black float-right"
                 onClick={onClose}
@@ -49,23 +51,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 </span>
               </button>
             </div>
-            <div className="relative p-6 flex-auto max-[60vh] overflow-y-auto">
+            <div className="relative p-6 flex-auto max-h-80 overflow-y-auto">
               {children}
             </div>
             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
               <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                className={`text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1`}
                 type="button"
                 onClick={onClose}
               >
-                Close
-              </button>
-              <button
-                className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={onClose}
-              >
-                Submit
+                {t["@T_Done"]?.value}
               </button>
             </div>
           </div>
