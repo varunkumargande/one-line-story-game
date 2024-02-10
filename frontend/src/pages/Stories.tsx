@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ParticlesBackground } from "components/ParticlesBackground";
 import { ObjectsRepelEffect } from "components/options/ObjectsRepelEffect";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useContentfulMediaTranslations } from "hooks/useContentfulMediaTranslations";
 import { Story } from "utils/types";
@@ -10,6 +10,7 @@ import { ConfigRoutes } from "config/routes.config";
 interface Button {
   className: string;
   title: string;
+  onClick: string;
 }
 
 type ButtonAction = "play" | "continue" | "results";
@@ -19,22 +20,30 @@ const Stories: React.FC = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const { t } = useContentfulMediaTranslations();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const buttonData: Button[] = [
     {
       className:
         "bg-sky-400 dark:border-sky-400 dark:text-sky-400 dark:border dark:bg-transparent text-white",
       title: t["@T_Play"]?.value,
+      onClick: location.pathname.includes("multiplayer")
+        ? ConfigRoutes.CREATE_PLAYERS_MULTI
+        : ConfigRoutes.CREATE_PLAYERS,
     },
     {
       className:
         "bg-[#ffc107] dark:border-[#ffc107] dark:text-[#ffc107] dark:border dark:bg-transparent text-white",
       title: t["@T_Continue"]?.value,
+      onClick: location.pathname.includes("multiplayer")
+        ? ConfigRoutes.MULTI_PLAYER
+        : ConfigRoutes.PLAY_WITH_BOT,
     },
     {
       className:
         "bg-green-500 dark:border-green-500 dark:text-green-500 dark:border dark:bg-transparent text-white",
       title: t["@T_Results"]?.value,
+      onClick: "",
     },
   ];
 
@@ -71,12 +80,13 @@ const Stories: React.FC = () => {
 
   const getType = (data: Story): ButtonAction => {
     switch (true) {
-      case !data.start_game:
-        return "play";
-      case data.start_game && !data.end_game:
-        return "continue";
-      case data.start_game && data.end_game:
+      case data.end_game:
         return "results";
+      case data.players.length === 0:
+        return "play";
+      case data.players.length > 0:
+        return "continue";
+
       // Add more cases as needed
       default:
         return "play"; // Return null for unknown actions
@@ -139,6 +149,14 @@ const Stories: React.FC = () => {
                   {t["@T_Players"]?.value} {story.players.length}
                 </p>
                 <button
+                  onClick={() =>
+                    navigate(
+                      getButtonByAction(getType(story))?.onClick.replace(
+                        ":storyId",
+                        story._id
+                      )!
+                    )
+                  }
                   className={`${
                     getButtonByAction(getType(story))?.className
                   } w-full px-4 py-2 rounded-md`}

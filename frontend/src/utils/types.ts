@@ -31,7 +31,6 @@ export interface Story {
   end_game: boolean;
   is_multi_player: boolean;
   players: any[]; // You might want to replace `any[]` with a more specific type if you know the structure of the `players` array.
-  start_game: boolean;
   title: string;
   __v: number;
   _id: string;

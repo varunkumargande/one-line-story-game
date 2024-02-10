@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
           {location.pathname !== "/" && (
             <div
               onClick={() => navigate(ConfigRoutes.HOME)}
-              className="-m-1.5 p-1.5"
+              className="-m-1.5 p-1.5 cursor-pointer"
             >
               <span className="sr-only">{Company}</span>
               <img

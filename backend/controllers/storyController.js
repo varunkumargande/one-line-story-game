@@ -38,7 +38,7 @@ const storyController = {
   listStories: async (req, res) => {
     try {
       // Fetch all stories from the database
-      const stories = await Story.find().populate("players").exec;
+      const stories = await Story.find();
       // Respond with the list of stories
       res.status(200).json(stories);
     } catch (error) {
@@ -78,17 +78,12 @@ const storyController = {
 
   getFilteredStories: async (req, res) => {
     try {
-      const { end_game, start_game, is_multi_player } = req.query;
+      const { end_game, is_multi_player } = req.query;
       let query = {};
 
       // Check if end_game query parameter is provided
       if (end_game !== undefined) {
         query.end_game = end_game.toLowerCase() === "true";
-      }
-
-      // Check if start_game query parameter is provided
-      if (start_game !== undefined) {
-        query.start_game = start_game.toLowerCase() === "true";
       }
 
       // Check if is_multi_player query parameter is provided

@@ -34,10 +34,13 @@ const playerController = {
 
   listPlayers: async (req, res) => {
     try {
-      // Find all players
-      const players = await Player.find();
-
-      // Respond with the list of players
+      const { story } = req.query;
+      let query = {};
+      // List all players based on params
+      if (story !== undefined) {
+        query.story = story;
+      }
+      const players = await Player.find(query);
       res.status(200).json(players);
     } catch (error) {
       console.error("Error fetching players:", error);

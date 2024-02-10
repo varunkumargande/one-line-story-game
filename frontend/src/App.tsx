@@ -11,6 +11,7 @@ import "./i18n";
 import NotFound from "pages/404";
 import Stories from "pages/Stories";
 import CreateGame from "pages/CreateGame";
+import CreatePlayers from "pages/CreatePlayers";
 
 const App: React.FC = () => {
   return (
@@ -30,6 +31,14 @@ const App: React.FC = () => {
             <Route
               path={ConfigRoutes.CREATE_GAME_MULTI}
               element={<CreateGame />}
+            />
+            <Route
+              path={ConfigRoutes.CREATE_PLAYERS}
+              element={<CreatePlayers />}
+            />
+            <Route
+              path={ConfigRoutes.CREATE_PLAYERS_MULTI}
+              element={<CreatePlayers />}
             />
             {/* Wildcard route for 404 - Not Found */}
             <Route path={ConfigRoutes.NOT_FOUND} element={<NotFound />} />

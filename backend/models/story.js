@@ -15,10 +15,6 @@ const storySchema = new mongoose.Schema({
   end_date: {
     type: Date,
   },
-  start_game: {
-    type: Boolean,
-    default: false,
-  },
   end_game: {
     type: Boolean,
     default: false,
