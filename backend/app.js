@@ -13,13 +13,6 @@ app.use(bodyParser.json());
 
 // Routes
 const routes = require("./routes/index");
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["POST", "GET", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
 app.use("/", routes);
 app.get("/example", (req, res) => {
   console.log("Received GET request at /example");
