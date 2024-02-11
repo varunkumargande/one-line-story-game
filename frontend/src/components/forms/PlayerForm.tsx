@@ -1,4 +1,5 @@
 import axios from "axios";
+import Delete from "components/svgs/Delete";
 import { ConfigRoutes } from "config/routes.config";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -170,9 +171,10 @@ const PlayerForm: React.FC = () => {
             </button>
 
             <button
-              className="bg-red-500 text-white dark:text-red-500 dark:border-red-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-red-600 mt-2 sm:mt-0"
+              className="flex bg-red-500 text-white dark:text-red-500 dark:border-red-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-red-600 mt-2 sm:mt-0"
               onClick={() => handleRemove(player)}
             >
+              <Delete className={"h-6 w-6"} />
               Remove
             </button>
           </div>
