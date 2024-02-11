@@ -64,7 +64,10 @@ const StoryForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-screen-md mx-auto mt-8">
+    <form
+      onSubmit={handleSubmit}
+      className="w-screen-md mx-auto mt-8 dark:text-cyan-600"
+    >
       <div className="mb-4">
         <label
           htmlFor="title"

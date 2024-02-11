@@ -52,8 +52,8 @@ const PlayerForm: React.FC = () => {
       })
       .catch((error) => {
         // Handle the error, show alert
-        console.error("Error creating story:", error);
-        alert("Failed to create story. Please try again."); // Show an alert on error
+        console.error("Error listing Players:", error);
+        alert("Failed to List Players. Please try again."); // Show an alert on error
       });
   }, [storyId]);
 
@@ -91,8 +91,8 @@ const PlayerForm: React.FC = () => {
       })
       .catch((error) => {
         // Handle the error, show alert
-        console.error("Error creating story:", error);
-        alert("Failed to create story. Please try again."); // Show an alert on error
+        console.error("Error creating Player:", error);
+        alert("Failed to create Player. Please try again."); // Show an alert on error
       });
   };
 
@@ -112,12 +112,12 @@ const PlayerForm: React.FC = () => {
         )
         .then((response) => {
           // Handle the successful response, if needed
-          console.log("Player created successfully:", response.data);
+          console.log("Player deleted successfully:", response.data);
         })
         .catch((error) => {
           // Handle the error, show alert
-          console.error("Error creating story:", error);
-          alert("Failed to delete story. Please try again."); // Show an alert on error
+          console.error("Error creating Player:", error);
+          alert("Failed to delete Player. Please try again."); // Show an alert on error
         });
     }
     const updatedPlayers = players.filter(
@@ -188,30 +188,50 @@ const PlayerForm: React.FC = () => {
           >
             Add More Players
           </button>
-          <button
-            className={`text-white dark:bg-transparent dark:border ${
-              areMinimumPlayersSaved && !areAnyModified
-                ? "bg-yellow-500  dark:text-yellow-500 dark:border-yellow-500 "
-                : "bg-gray-500  dark:text-gray dark:border-gray"
-            } text-white py-2 px-4 rounded focus:outline-none ${
-              areMinimumPlayersSaved && !areAnyModified
-                ? "hover:bg-yellow-600"
-                : "cursor-not-allowed"
-            }`}
-            onClick={() => {
-              if (areMinimumPlayersSaved && !areAnyModified) {
-                // Navigate to the next step or perform any desired action
-                navigate(
-                  location.pathname.includes(ConfigRoutes.MULTI_PLAYER)
-                    ? ConfigRoutes.MULTI_PLAYER.replace(":storyId", storyId!)
-                    : ConfigRoutes.PLAY_WITH_BOT.replace(":storyId", storyId!)
-                );
-              }
-            }}
-            disabled={!areMinimumPlayersSaved || areAnyModified}
-          >
-            Next
-          </button>
+          <div className="relative inline-block">
+            <div className="has-tooltip">
+              {(!areMinimumPlayersSaved || areAnyModified) && (
+                <span
+                  className="tooltip mt-[-2.4rem] w-max
+              px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm  dark:bg-gray-700"
+                >
+                  Minimum two players are required and all players should be
+                  saved
+                </span>
+              )}
+              <button
+                title="Save All Players and than click"
+                className={`text-white dark:bg-transparent dark:border ${
+                  areMinimumPlayersSaved && !areAnyModified
+                    ? "bg-yellow-500  dark:text-yellow-500 dark:border-yellow-500 "
+                    : "bg-gray-500  dark:text-gray dark:border-gray"
+                } text-white py-2 px-4 rounded focus:outline-none ${
+                  areMinimumPlayersSaved && !areAnyModified
+                    ? "hover:bg-yellow-600"
+                    : "cursor-not-allowed"
+                }`}
+                onClick={() => {
+                  if (areMinimumPlayersSaved && !areAnyModified) {
+                    // Navigate to the next step or perform any desired action
+                    navigate(
+                      location.pathname.includes(ConfigRoutes.MULTI_PLAYER)
+                        ? ConfigRoutes.MULTI_PLAYER.replace(
+                            ":storyId",
+                            storyId!
+                          )
+                        : ConfigRoutes.PLAY_WITH_BOT.replace(
+                            ":storyId",
+                            storyId!
+                          )
+                    );
+                  }
+                }}
+                disabled={!areMinimumPlayersSaved || areAnyModified}
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

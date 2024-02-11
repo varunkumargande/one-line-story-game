@@ -6,6 +6,7 @@ import axios from "axios";
 import { useContentfulMediaTranslations } from "hooks/useContentfulMediaTranslations";
 import { Story } from "utils/types";
 import { ConfigRoutes } from "config/routes.config";
+import Delete from "components/svgs/Delete";
 
 interface Button {
   className: string;
@@ -108,6 +109,27 @@ const Stories: React.FC = () => {
     </button>
   );
 
+  const handleRemove = (currentStory: Story) => {
+    if (currentStory?._id) {
+      axios
+        .delete(
+          `${process.env.REACT_APP_BACKEND_URL}stories/${currentStory._id}`
+        )
+        .then((response) => {
+          // Handle the successful response, if needed
+          console.log("Story deleted successfully:", response.data);
+          setStories((prev: Story[]) => {
+            return prev.filter((story) => story._id !== currentStory._id);
+          });
+        })
+        .catch((error) => {
+          // Handle the error, show alert
+          console.error("Error creating story:", error);
+          alert("Failed to delete story. Please try again."); // Show an alert on error
+        });
+    }
+  };
+
   return (
     <div
       className={`container mx-auto text-white dark:text-sky-400 h-full items-center`}
@@ -121,7 +143,7 @@ const Stories: React.FC = () => {
       {!stories.length ? (
         <div className="flex justify-center items-center absolute inset-0">
           <div className="dark:dark-card shadow-xl bg-white dark:bg-transparent text-black dark:text-sky-400 p-8 rounded-md w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12">
-            <h1 className="text-2xl font-bold text-center items-center">
+            <h1 className="text-2xl font-bold text-center items-center leading-10">
               {t["@T_Create_New_Story"]?.value}
               <span className="ml-3">
                 {
@@ -133,11 +155,17 @@ const Stories: React.FC = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 text-black dark:text-sky-400">
-          {stories.map((story: any) => (
+          {stories.map((story: Story) => (
             <div
               key={story._id}
               className="shadow-xl max-w-sm mt-3 w-full dark:shadow-xl-dark dark:dark-card rounded-md overflow-hidden p-3 bg-white dark:bg-transparent dark:border-sky-400"
             >
+              <div
+                onClick={() => handleRemove(story)}
+                className="float-right bg-blue-200 dark:bg-transparent p-1 rounded"
+              >
+                <Delete className={"h-6 w-6"} />
+              </div>
               <img
                 className="w-full h-40 object-contain"
                 src={`/${type}.png`}

@@ -3,8 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ConfigRoutes } from "config/routes.config";
 import Home from "./pages/Home";
-import MultiPlayer from "./pages/MultiPlayer";
-import PlayWithBot from "./pages/PlayWithBot";
+import Game from "./pages/Game";
 import Navigation from "./components/Navigation";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./i18n";
@@ -21,11 +20,8 @@ const App: React.FC = () => {
           <Navigation />
           <Routes>
             <Route path={ConfigRoutes.HOME} element={<Home />} />
-            <Route path={ConfigRoutes.MULTI_PLAYER} element={<MultiPlayer />} />
-            <Route
-              path={ConfigRoutes.PLAY_WITH_BOT}
-              element={<PlayWithBot />}
-            />
+            <Route path={ConfigRoutes.MULTI_PLAYER} element={<Game />} />
+            <Route path={ConfigRoutes.PLAY_WITH_BOT} element={<Game />} />
             <Route path={ConfigRoutes.STORIES} element={<Stories />} />
             <Route path={ConfigRoutes.CREATE_GAME} element={<CreateGame />} />
             <Route
