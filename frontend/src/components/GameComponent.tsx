@@ -120,7 +120,7 @@ const GameComponent: React.FC = () => {
           const message = response.data;
           const newMessage: Message = {
             _id: message._id,
-            player: currentPlayer.name,
+            player: currentPlayer._id,
             content: inputText,
           };
 
