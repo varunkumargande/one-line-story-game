@@ -56,7 +56,7 @@ const SmokeEffect: React.FC = () => {
       constructor(x: number, y: number, color: string) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 10 + 1;
+        this.size = Math.random() * 5 + 1;
         this.color = color;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
@@ -125,7 +125,7 @@ const SmokeEffect: React.FC = () => {
 
   return (
     <div className="relative h-screen">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full " />
     </div>
   );
 };

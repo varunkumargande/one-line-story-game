@@ -7,5 +7,6 @@ export enum ConfigRoutes {
   CREATE_GAME="/play-with-bot/create-game",
   CREATE_PLAYERS_MULTI="/multiplayer/create-players/:storyId",
   CREATE_PLAYERS="/play-with-bot/create-players/:storyId",
+  RESULTS="/results/:storyId",
   NOT_FOUND="*",
 }

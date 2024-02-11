@@ -34,8 +34,8 @@ const StoryForm: React.FC = () => {
     // Axios POST request
     const data = await axios
       .post(`${process.env.REACT_APP_BACKEND_URL}stories`, {
-        title,
-        topic,
+        title: title.charAt(0).toUpperCase() + title.slice(1),
+        topic: topic.charAt(0).toUpperCase() + topic.slice(1),
         is_multi_player,
       })
       .then((response) => {

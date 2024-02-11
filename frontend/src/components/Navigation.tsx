@@ -66,7 +66,7 @@ const Navigation: React.FC = () => {
         </div>
         <div className="flex">
           <div className="flex items-center mr-3">
-            <Globe className="text-white mr-2" />
+            <Globe className="dark:text-white text-gray-600 mr-2" />
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"

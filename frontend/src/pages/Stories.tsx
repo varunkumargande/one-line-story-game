@@ -44,7 +44,7 @@ const Stories: React.FC = () => {
       className:
         "bg-green-500 dark:border-green-500 dark:text-green-500 dark:border dark:bg-transparent text-white",
       title: t["@T_Results"]?.value,
-      onClick: "",
+      onClick: ConfigRoutes.RESULTS,
     },
   ];
 
@@ -72,7 +72,8 @@ const Stories: React.FC = () => {
         );
         setStories(response.data);
       } catch (error) {
-        console.error("Error fetching stories:", error);
+        console.error("Error fetching Stories:", error);
+        alert("Failed to List Stories. Please try again.");
       }
     };
 
@@ -158,11 +159,23 @@ const Stories: React.FC = () => {
           {stories.map((story: Story) => (
             <div
               key={story._id}
-              className="shadow-xl max-w-sm mt-3 w-full dark:shadow-xl-dark dark:dark-card rounded-md overflow-hidden p-3 bg-white dark:bg-transparent dark:border-sky-400"
+              onClick={() =>
+                navigate(
+                  getButtonByAction(getType(story))?.onClick.replace(
+                    ":storyId",
+                    story._id
+                  )!
+                )
+              }
+              className="shadow-xl cursor-pointer max-w-sm mt-3 w-full dark:shadow-xl-dark dark:dark-card rounded-md overflow-hidden p-3 bg-white dark:bg-transparent dark:border-sky-400"
             >
               <div
-                onClick={() => handleRemove(story)}
-                className="float-right bg-blue-200 dark:bg-transparent p-1 rounded"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleRemove(story);
+                }}
+                className="float-right bg-blue-200 dark:bg-transparent p-1 rounded cursor-pointer"
               >
                 <Delete className={"h-6 w-6"} />
               </div>
@@ -173,6 +186,9 @@ const Stories: React.FC = () => {
               />
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{story.title}</h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-2">
+                  {story.topic}
+                </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-2">
                   {t["@T_Players"]?.value} {story.players.length}
                 </p>

@@ -67,33 +67,51 @@ const PlayerForm: React.FC = () => {
     setInputValues({ ...inputValues, [newPlayer.id]: "" });
   };
 
-  const handleSave = (id: number) => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}players`, {
-        storyId,
-        name: inputValues[id],
-      })
-      .then((response) => {
-        const updatedPlayers = players.map((player) =>
-          player.id === id
-            ? {
-                ...player,
-                name: inputValues[id],
-                modified: false,
-                _id: response.data._id,
-              }
-            : player
-        );
-        // Handle the successful response, if needed
-        console.log("Player created successfully:", response.data);
-        setPlayers(updatedPlayers);
-        // You can also call the onSubmit function passed as a prop to handle the state in your parent component
-      })
-      .catch((error) => {
-        // Handle the error, show alert
-        console.error("Error creating Player:", error);
-        alert("Failed to create Player. Please try again."); // Show an alert on error
-      });
+  const handleSave = (currentPlayer: Player) => {
+    const id = currentPlayer.id;
+    if (inputValues[id].length >= 3) {
+      const requestPromise = currentPlayer?._id
+        ? axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}players/${currentPlayer?._id}`,
+            {
+              story: storyId,
+              name:
+                inputValues[id].charAt(0).toUpperCase() +
+                inputValues[id].slice(1),
+            }
+          )
+        : axios.post(`${process.env.REACT_APP_BACKEND_URL}players`, {
+            storyId,
+            name:
+              inputValues[id].charAt(0).toUpperCase() +
+              inputValues[id].slice(1),
+          });
+
+      requestPromise
+        .then((response) => {
+          const updatedPlayers = players.map((player) =>
+            player.id === id
+              ? {
+                  ...player,
+                  name: inputValues[id],
+                  modified: false,
+                  _id: response.data._id,
+                }
+              : player
+          );
+          // Handle the successful response, if needed
+          console.log("Player created successfully:", response.data);
+          setPlayers(updatedPlayers);
+          // You can also call the onSubmit function passed as a prop to handle the state in your parent component
+        })
+        .catch((error) => {
+          // Handle the error, show alert
+          console.error("Error creating Player:", error);
+          alert("Failed to create Player. Please try again."); // Show an alert on error
+        });
+    } else {
+      alert("Failed to create Player. Minimum 3 Chars Required");
+    }
   };
 
   const handleInputChange = (id: number, value: string) => {
@@ -164,7 +182,7 @@ const PlayerForm: React.FC = () => {
               className={`${
                 !player.modified && "hidden"
               } bg-blue-500 dark:text-blue-500 dark:border-blue-500 hover:bg-blue-600 text-white  dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none mt-2 sm:mt-0 mr-3`}
-              onClick={() => handleSave(player.id)}
+              onClick={() => handleSave(player)}
               disabled={!player.modified}
             >
               Save

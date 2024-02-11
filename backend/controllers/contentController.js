@@ -32,9 +32,13 @@ const contentController = {
 
   listContents: async (req, res) => {
     try {
-      // Find all contents
-      const contents = await Content.find();
-
+      const { story } = req.query;
+      let query = {};
+      // List all contents
+      if (story !== undefined) {
+        query.story = story;
+      }
+      const contents = await Content.find(query);
       // Respond with the list of contents
       res.status(200).json(contents);
     } catch (error) {

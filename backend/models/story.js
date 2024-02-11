@@ -12,9 +12,6 @@ const storySchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  end_date: {
-    type: Date,
-  },
   end_game: {
     type: Boolean,
     default: false,
