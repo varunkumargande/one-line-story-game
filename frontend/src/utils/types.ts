@@ -36,3 +36,9 @@ export interface Story {
   _id: string;
   topic: string;
 }
+
+export interface Message {
+  _id: number;
+  player: string;
+  content: string;
+}

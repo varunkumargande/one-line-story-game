@@ -124,7 +124,7 @@ const SmokeEffect: React.FC = () => {
   }, [particles]);
 
   return (
-    <div className="relative h-screen">
+    <div>
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full " />
     </div>
   );

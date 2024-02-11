@@ -6,12 +6,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Edit from "./svgs/Edit";
 import { ConfigRoutes } from "config/routes.config";
-
-interface Message {
-  _id: number;
-  player: string;
-  content: string;
-}
+import { Message } from "utils/types";
 
 interface Player {
   _id: string;
