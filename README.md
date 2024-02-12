@@ -56,12 +56,15 @@ The API is prepared but pending integration. Need 1 more day.
 **Import Order Optimization:**
 Organizing import statements for improved code structure.
 
-**SEO Enhancement:**
-Implementing SEO strategies for improved search engine visibility.
+**Test Cases:**
+Implementing Test Cases.
+
+**Note:**
+This whole application is done in 16 hrs. So there is a scope for code improvement
 
 ### Production URLs
 
-**Frontend Deployment:** [one-line-story](https://one-line-story.monkwall.com/)
+**Frontend Webapp:** [one-line-story](https://one-line-story.monkwall.com/)
 
 **Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
 
