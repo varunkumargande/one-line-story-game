@@ -2,6 +2,14 @@
 
 Welcome to our robust project structure designed with precision and clarity, consisting of two core elements:
 
+### Demo Recordings
+
+[Demo Part 1](https://drive.google.com/file/d/1J0F73HZRcWG6H5mntU9tM-YaFKKrFizW/view?usp=drive_link)
+
+[Demo Part 2](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
+
+[Seo Impmlented Sample Image](https://drive.google.com/file/d/1Xrr3Ej4j4jD9ZlZqdqcGdkrin4T8LRCs/view?usp=drive_link)
+
 ### Backend Architecture (Node.js, Mongoose)
 
 To initialize the backend with Node.js, execute:
