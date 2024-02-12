@@ -16,6 +16,8 @@ Welcome to our robust project structure designed with precision and clarity, con
 
 **Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
 
+**You can download envs:** [here](https://drive.google.com/drive/folders/1Mdzei_kbiZ_IItjyCbqoeEz063n0YOYg?usp=sharing)
+
 ### Backend Architecture (Node.js, Mongoose)
 
 To initialize the backend with Node.js, execute:
@@ -72,6 +74,9 @@ Organizing import statements for improved code structure.
 
 **Test Cases:**
 Implementing Test Cases.
+
+**Much More Mobile Responsiveness:**
+80% is acheived but required some efforts to test in all devices.
 
 **Note:**
 This whole application is done in 16 hrs. So there is a scope for code improvement
