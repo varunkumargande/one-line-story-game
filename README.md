@@ -56,7 +56,7 @@ A Link to access all my APIs via postman is [here](https://api.postman.com/colle
 
 **MongoDB Atlas:** Reliable cloud-based database storage.
 
-### Pending Developer Tasks
+### This are not listed in Assigment but still I want to do
 
 **Websockets Integration:**
 To Implement I need an additional day.
