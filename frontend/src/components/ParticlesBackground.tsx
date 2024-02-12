@@ -26,6 +26,7 @@ export const ParticlesBackground = ({
   ]);
 
   const { theme } = useTheme();
+  const [loaded, setLoaded] = useState(false);
 
   // this should be run only once per application lifetime
   useEffect(() => {
@@ -44,6 +45,7 @@ export const ParticlesBackground = ({
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
     // console.log(container);
+    setLoaded(true);
   };
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export const ParticlesBackground = ({
           id="tsparticles"
           particlesLoaded={particlesLoaded}
           options={options}
-          className="fixed"
+          className={loaded ? `fixed` : "hidden"}
         />
       </div>
     );
