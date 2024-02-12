@@ -235,7 +235,7 @@ const PlayerForm: React.FC = () => {
           </div>
           {(!areMinimumPlayersSaved || areAnyModified) && (
             <p
-              className="w-auto
+              className="w-auto mt-2
               px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm  dark:bg-gray-700"
             >
               Minimum two players are required and all players should be saved
