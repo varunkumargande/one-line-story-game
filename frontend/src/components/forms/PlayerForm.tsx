@@ -201,7 +201,7 @@ const PlayerForm: React.FC = () => {
       <div className="mt-12 flex px-5">
         <div className="mx-auto space-x-3">
           <button
-            className="bg-green-500 text-white dark:text-green-500 dark:border-green-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-green-600"
+            className="bg-green-500 text-white dark:text-green-500 dark:border-green-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-green-600 mb-3"
             onClick={addPlayer}
           >
             Add More Players
