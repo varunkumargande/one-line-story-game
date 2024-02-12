@@ -19,6 +19,7 @@ type ButtonAction = "play" | "continue" | "results";
 const Stories: React.FC = () => {
   const { type } = useParams();
   const [stories, setStories] = useState<Story[]>([]);
+  const [fetched, setFetched] = useState(false);
   const { t } = useContentfulMediaTranslations();
   const navigate = useNavigate();
   const location = useLocation();
@@ -71,6 +72,7 @@ const Stories: React.FC = () => {
           }filter/stories/?is_multi_player=${type === "multiplayer"}`
         );
         setStories(response.data);
+        setFetched(true);
       } catch (error) {
         console.error("Error fetching Stories:", error);
         alert("Failed to List Stories. Please try again.");
@@ -145,7 +147,7 @@ const Stories: React.FC = () => {
         <div className="flex justify-center items-center absolute inset-0">
           <div className="dark:dark-card shadow-xl bg-white dark:bg-transparent text-black dark:text-sky-400 p-8 rounded-md w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12">
             <h1 className="text-2xl font-bold text-center items-center leading-10">
-              {t["@T_Create_New_Story"]?.value}
+              {fetched ? t["@T_Create_New_Story"]?.value : "Loading"}
               <span className="ml-3">
                 {
                   <CreateNewGame className="dark:text-sky-400 dark:border-sky-400" />
