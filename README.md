@@ -64,7 +64,7 @@ A Link to access all my APIs via postman is [here](https://api.postman.com/colle
 To Implement I need an additional day.
 
 **Content Translation Framework:**
-Enabling translation support for whole content.
+Enabling translation support for whole content. Asap 40% of data is translatable 
 
 **ChatGPT Interaction API:**
 The API is prepared but pending integration. Need 1 more day.
