@@ -199,57 +199,48 @@ const PlayerForm: React.FC = () => {
         ))}
       </div>
       <div className="mt-12 flex px-5">
-        <div className="mx-auto space-x-3">
+        <div className="mx-auto text-center">
           <button
-            className="bg-green-500 text-white dark:text-green-500 dark:border-green-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-green-600 mb-3"
+            className="mr-3 bg-green-500 text-white dark:text-green-500 dark:border-green-500 dark:bg-transparent dark:border nav py-2 px-4 rounded focus:outline-none hover:bg-green-600 mb-3"
             onClick={addPlayer}
           >
             Add More Players
           </button>
           <div className="relative inline-block">
-            <div className="has-tooltip">
-              {(!areMinimumPlayersSaved || areAnyModified) && (
-                <span
-                  className="tooltip mt-[-2.4rem] w-max
-              px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm  dark:bg-gray-700"
-                >
-                  Minimum two players are required and all players should be
-                  saved
-                </span>
-              )}
-              <button
-                title="Save All Players and than click"
-                className={`text-white dark:bg-transparent dark:border ${
-                  areMinimumPlayersSaved && !areAnyModified
-                    ? "bg-yellow-500  dark:text-yellow-500 dark:border-yellow-500 "
-                    : "bg-gray-500  dark:text-gray dark:border-gray"
-                } text-white py-2 px-4 rounded focus:outline-none ${
-                  areMinimumPlayersSaved && !areAnyModified
-                    ? "hover:bg-yellow-600"
-                    : "cursor-not-allowed"
-                }`}
-                onClick={() => {
-                  if (areMinimumPlayersSaved && !areAnyModified) {
-                    // Navigate to the next step or perform any desired action
-                    navigate(
-                      location.pathname.includes(ConfigRoutes.MULTI_PLAYER)
-                        ? ConfigRoutes.MULTI_PLAYER.replace(
-                            ":storyId",
-                            storyId!
-                          )
-                        : ConfigRoutes.PLAY_WITH_BOT.replace(
-                            ":storyId",
-                            storyId!
-                          )
-                    );
-                  }
-                }}
-                disabled={!areMinimumPlayersSaved || areAnyModified}
-              >
-                Next
-              </button>
-            </div>
+            <button
+              title="Save All Players and than click"
+              className={`nav rounded dark:bg-transparent dark:border ${
+                areMinimumPlayersSaved && !areAnyModified
+                  ? "bg-yellow-500  dark:text-yellow-500 dark:border-yellow-500 "
+                  : "bg-gray-500  dark:text-gray dark:border-gray"
+              } text-white py-2 px-4 focus:outline-none ${
+                areMinimumPlayersSaved && !areAnyModified
+                  ? "hover:bg-yellow-600"
+                  : "cursor-not-allowed"
+              }`}
+              onClick={() => {
+                if (areMinimumPlayersSaved && !areAnyModified) {
+                  // Navigate to the next step or perform any desired action
+                  navigate(
+                    location.pathname.includes(ConfigRoutes.MULTI_PLAYER)
+                      ? ConfigRoutes.MULTI_PLAYER.replace(":storyId", storyId!)
+                      : ConfigRoutes.PLAY_WITH_BOT.replace(":storyId", storyId!)
+                  );
+                }
+              }}
+              disabled={!areMinimumPlayersSaved || areAnyModified}
+            >
+              Next
+            </button>
           </div>
+          {(!areMinimumPlayersSaved || areAnyModified) && (
+            <p
+              className="w-auto
+              px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm  dark:bg-gray-700"
+            >
+              Minimum two players are required and all players should be saved
+            </p>
+          )}
         </div>
       </div>
     </div>
