@@ -8,48 +8,61 @@ To initialize the backend with Node.js, execute:
 
 ```bash
 npm start
+```
 
-For development using nodemon, use:
+To initialize the backend with Nodemon, execute:
 
-bash
-Copy code
-npm run dev
+```bash
+npm run start
+```
+
 The backend codebase resides in the backend folder.
 
-Frontend Implementation (React.js)
+### Frontend Implementation (React.js)
+
 To launch the frontend, utilize:
 
-bash
-Copy code
+```bash
 npm start
+```
+
 The frontend codebase is organized within the frontend folder.
 
-API Documentation
-Our API documentation is meticulously crafted and accessible here.
+### API Documentation
 
-Utilized Tools
-Contentful: A robust CMS solution.
-GitHub: Centralized repository hosting.
-Vercel: Seamless deployment and DevOps integration.
-MongoDB Atlas: Reliable cloud-based database storage.
-Pending Developer Tasks
-Websockets Integration:
+A Link to access all my APIs via postman is [here](https://api.postman.com/collections/32817122-730e412b-b599-4dea-8b92-e6276af52901?access_key=PMAT-01HPD9D13AJVXG4A67FF3FZTZE).
 
-Scheduled for implementation, requiring an estimated additional day.
-Content Translation Framework:
+### Utilized Tools
 
-Enabling translation support for all content.
-ChatGPT Interaction API:
+**Contentful:** A robust CMS solution.
 
-The API is prepared but pending integration.
-Import Order Optimization:
+**GitHub:** Centralized repository hosting.
 
+**Vercel:** Seamless deployment and DevOps integration.
+
+**MongoDB Atlas:** Reliable cloud-based database storage.
+
+### Pending Developer Tasks
+
+**Websockets Integration:**
+To Implement I need an additional day.
+
+**Content Translation Framework:**
+Enabling translation support for whole content.
+
+**ChatGPT Interaction API:**
+The API is prepared but pending integration. Need 1 more day.
+
+**Import Order Optimization:**
 Organizing import statements for improved code structure.
-SEO Enhancement:
 
+**SEO Enhancement:**
 Implementing SEO strategies for improved search engine visibility.
-Production URLs
-Frontend Deployment: https://one-line-story.monkwall.com/
-Backend Production Endpoint: https://admin-one-line-story.monkwall.com/stories
+
+### Production URLs
+
+**Frontend Deployment:** [one-line-story](https://one-line-story.monkwall.com/)
+
+**Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
+
 Feel free to contribute or reach out for further technical discussions!
-```
