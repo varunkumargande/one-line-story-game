@@ -27,7 +27,7 @@ export const ShowGameCard = ({
     >
       <div className="p-6">
         <div className="flex items-center">
-          <div>
+          <div className="mx-auto">
             <div className="lg:h-48 lg:w-56 h-auto border border-gray-300 overflow-hidden">
               <img
                 src={image}
