@@ -8,7 +8,13 @@ Welcome to our robust project structure designed with precision and clarity, con
 
 [Demo Part 2](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
 
-[Seo Impmlented Sample Image](https://drive.google.com/file/d/1Xrr3Ej4j4jD9ZlZqdqcGdkrin4T8LRCs/view?usp=drive_link)
+[Seo Implmented Sample Image](https://drive.google.com/file/d/1Xrr3Ej4j4jD9ZlZqdqcGdkrin4T8LRCs/view?usp=drive_link)
+
+### Production URLs
+
+**Frontend Webapp:** [one-line-story](https://one-line-story.monkwall.com/)
+
+**Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
 
 ### Backend Architecture (Node.js, Mongoose)
 
@@ -69,11 +75,5 @@ Implementing Test Cases.
 
 **Note:**
 This whole application is done in 16 hrs. So there is a scope for code improvement
-
-### Production URLs
-
-**Frontend Webapp:** [one-line-story](https://one-line-story.monkwall.com/)
-
-**Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
 
 Feel free to contribute or reach out for further technical discussions!
