@@ -140,7 +140,9 @@ const Stories: React.FC = () => {
       <ParticlesBackground options={ObjectsRepelEffect} />
 
       <div className="flex justify-between mt-4 items-center">
-        <h1 className="text-3xl font-bold my-4">{t["@T_Stories"]?.value}</h1>
+        <h1 className="text-3xl font-bold my-4 pr-3">
+          {t["@T_Stories"]?.value}
+        </h1>
         {<CreateNewGame className="text-white z-10" />}
       </div>
       {!stories.length ? (
