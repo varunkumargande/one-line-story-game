@@ -72,27 +72,25 @@ export const ParticlesBackground = ({
     return () => clearInterval(intervalId);
   }, [theme]);
 
-  if (init) {
-    return (
-      <div
-        className={`z-[-1] absolute top-0 left-0 w-full h-full`}
-        style={{
-          background: `linear-gradient(to bottom, ${
-            theme === "dark"
-              ? `${darkColors[0]}, ${darkColors[1]}`
-              : `${colors[0]}, ${colors[1]}`
-          })`,
-        }}
-      >
+  return (
+    <div
+      className={`z-[-1] absolute top-0 left-0 w-full h-full`}
+      style={{
+        background: `linear-gradient(to bottom, ${
+          theme === "dark"
+            ? `${darkColors[0]}, ${darkColors[1]}`
+            : `${colors[0]}, ${colors[1]}`
+        })`,
+      }}
+    >
+      {init && (
         <Particles
           id="tsparticles"
           particlesLoaded={particlesLoaded}
           options={options}
           className={loaded ? `fixed` : "hidden"}
         />
-      </div>
-    );
-  }
-
-  return <></>;
+      )}
+    </div>
+  );
 };
