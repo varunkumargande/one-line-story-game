@@ -67,7 +67,7 @@ To Implement I need an additional day.
 Enabling translation support for whole content. Asap 40% of data is translatable 
 
 **ChatGPT Interaction API:**
-The API is prepared but pending integration. Need 1 more day.
+The API is prepared but pending integration. Need 1 more day. **Thats the reason as of now play with bot is same as multiplayer.**
 
 **Import Order Optimization:**
 Organizing import statements for improved code structure.
