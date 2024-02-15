@@ -18,7 +18,7 @@ Welcome to our robust project structure designed with precision and clarity, con
 
 **Backend Production Endpoint:** [admin-one-line-story](https://admin-one-line-story.monkwall.com/stories)
 
-**You can download envs:** [here](https://drive.google.com/drive/folders/1Mdzei_kbiZ_IItjyCbqoeEz063n0YOYg?usp=sharing)
+**You can download envs to run locally:** [here](https://drive.google.com/drive/folders/1Mdzei_kbiZ_IItjyCbqoeEz063n0YOYg?usp=sharing)
 
 ### Backend Architecture (Node.js, Mongoose)
 
