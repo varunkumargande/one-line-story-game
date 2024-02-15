@@ -4,9 +4,11 @@ Welcome to our robust project structure designed with precision and clarity, con
 
 ### Demo Recordings
 
-[Demo Part 1](https://drive.google.com/file/d/1J0F73HZRcWG6H5mntU9tM-YaFKKrFizW/view?usp=drive_link)
+[Product Demo (Part 1)](https://drive.google.com/file/d/1J0F73HZRcWG6H5mntU9tM-YaFKKrFizW/view?usp=drive_link)
 
-[Demo Part 2](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
+[Mobile Responsive Product Demo (Part 2)](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
+
+[Web Sockets (only works in local asap) and Stories filter Demo (Part 3)](https://drive.google.com/file/d/1EGXIbT8HPtWJwqtlagDBhs6X4fxwtilA/view)
 
 [Seo Implemented Sample Image](https://drive.google.com/file/d/1Xrr3Ej4j4jD9ZlZqdqcGdkrin4T8LRCs/view?usp=drive_link)
 
@@ -61,10 +63,10 @@ A Link to access all my APIs via postman is [here](https://api.postman.com/colle
 ### This are not listed in Assigment but still I want to do
 
 **Websockets Integration:**
-To Implement I need an additional day.
+Implemented in local for production need to use paid account of Vercel.
 
 **Content Translation Framework:**
-Enabling translation support for whole content. Asap 40% of data is translatable 
+Enabling translation support for whole content. Asap 40% of data is translatable
 
 **ChatGPT Interaction API:**
 The API is prepared but pending integration. Need 1 more day. **Thats the reason as of now play with bot is same as multiplayer.**
