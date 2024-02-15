@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const http = require("http");
+const socketIo = require("socket.io");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const cors = require("cors");
 
 const app = express();
 const PORT = 8000;
+const WEBSOCKET_PORT = 8001;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,15 +24,52 @@ app.use(
   })
 );
 app.use("/", routes);
-app.get("/example", (req, res) => {
-  console.log("Received GET request at /example");
+app.get("/", (req, res) => {
+  console.log("Received GET request at /");
   res.send("Hello from the server!");
+});
+
+// WebSocket
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "*",
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("joinStory", (storyId) => {
+    // Join the room
+    socket.join(storyId);
+    console.log(`User joined room ${storyId}`);
+  });
+
+  // Handle WebSocket events here
+  socket.on("addOrModifyData", (data) => {
+    console.log(`Button clicked in room ${data.storyId}:`, data);
+
+    // Broadcast the message to all connected clients in the specific room
+    io.to(data.storyId).emit("dataChanged", {
+      message: data.message,
+    });
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  });
 });
 
 mongoose
   .connect(process.env.MONGODB_URI)
   .then((result) => {
     app.listen(PORT);
+    io.listen(WEBSOCKET_PORT, () => {
+      console.log(`WebSocket server listening on port ${WEBSOCKET_PORT}`);
+    });
   })
   .catch((err) => {
     console.log(err);

@@ -78,7 +78,7 @@ const storyController = {
 
   getFilteredStories: async (req, res) => {
     try {
-      const { end_game, is_multi_player } = req.query;
+      const { end_game, is_multi_player, is_players } = req.query;
       let query = {};
 
       // Check if end_game query parameter is provided
@@ -98,6 +98,18 @@ const storyController = {
         stories = await Story.find(query);
       } else {
         stories = await Story.find();
+      }
+
+      // If is_players is provided
+      if (is_players !== undefined) {
+        const hasPlayers = is_players.toLowerCase() === "true";
+
+        // Filter stories based on is_players
+        stories = stories.filter((story) => {
+          return hasPlayers
+            ? story.players.length > 0
+            : story.players.length === 0;
+        });
       }
 
       const populatePromises = stories.map(

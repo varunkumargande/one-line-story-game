@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
           }}
         >
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white nav dark:bg-[#00000080] dark:border dark:border-gray-400 outline-none focus:outline-none">
-            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 dark:border-gray-400 rounded-t ">
+            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 dark:border-gray-400 rounded-t">
               <h3 className="text-3xl font=semibold">{title}</h3>
               <button
                 className="bg-transparent border-0 float-right"
@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
                 </span>
               </button>
             </div>
-            <div className="relative p-6 flex-auto max-h-80 overflow-y-auto">
+            <div className="relative p-6 flex-auto max-h-80 overflow-y-auto dark:text-white">
               {children}
             </div>
             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

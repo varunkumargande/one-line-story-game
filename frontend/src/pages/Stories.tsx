@@ -7,6 +7,7 @@ import { useContentfulMediaTranslations } from "hooks/useContentfulMediaTranslat
 import { Story } from "utils/types";
 import { ConfigRoutes } from "config/routes.config";
 import Delete from "components/svgs/Delete";
+import FilterDropdown from "components/filter";
 
 interface Button {
   className: string;
@@ -16,10 +17,18 @@ interface Button {
 
 type ButtonAction = "play" | "continue" | "results";
 
+const filterOptions = [
+  { key: "All", value: "" },
+  { key: "Not Started", value: "is_players=false" },
+  { key: "Started", value: "is_players=true&end_game=false" },
+  { key: "Finished", value: "end_game=true" },
+];
+
 const Stories: React.FC = () => {
   const { type } = useParams();
   const [stories, setStories] = useState<Story[]>([]);
   const [fetched, setFetched] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
   const { t } = useContentfulMediaTranslations();
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,7 +78,9 @@ const Stories: React.FC = () => {
         const response = await axios.get(
           `${
             process.env.REACT_APP_BACKEND_URL
-          }filter/stories/?is_multi_player=${type === "multiplayer"}`
+          }filter/stories/?is_multi_player=${
+            type === "multiplayer"
+          }&${selectedValue}`
         );
         setStories(response.data);
         setFetched(true);
@@ -80,7 +91,7 @@ const Stories: React.FC = () => {
     };
 
     fetchStories();
-  }, [type]);
+  }, [selectedValue, type]);
 
   const getType = (data: Story): ButtonAction => {
     switch (true) {
@@ -133,6 +144,11 @@ const Stories: React.FC = () => {
     }
   };
 
+  const handleFilterSelect = (value: string) => {
+    // Handle filter selection logic here
+    setSelectedValue(value);
+  };
+
   return (
     <div
       className={`container mx-auto text-white dark:text-sky-400 h-full items-center`}
@@ -145,6 +161,11 @@ const Stories: React.FC = () => {
         </h1>
         {<CreateNewGame className="text-white z-10" />}
       </div>
+      <FilterDropdown
+        onFilterSelect={handleFilterSelect}
+        filterOptions={filterOptions}
+      />
+
       {!stories.length ? (
         <div className="flex justify-center items-center absolute inset-0">
           <div className="dark:dark-card shadow-xl bg-white dark:bg-transparent text-black dark:text-sky-400 p-8 rounded-md w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12">

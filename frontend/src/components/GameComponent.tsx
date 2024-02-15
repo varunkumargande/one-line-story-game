@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Send from "./svgs/Send";
 import axios from "axios";
+import io from "socket.io-client";
 import { useNavigate, useParams } from "react-router-dom";
 import Edit from "./svgs/Edit";
 import { ConfigRoutes } from "config/routes.config";
@@ -61,10 +62,48 @@ const GameComponent: React.FC = () => {
   const { storyId } = useParams();
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
+  const [socketTriggered, setSocketTriggered] = useState(false);
   const [players, setPlayers] = useState<Player[]>([]);
   const [inputText, setInputText] = useState<string>("");
   const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  // Replace with your server URL
+  const socket = io(process.env.REACT_APP_SOCKET_URL!, {
+    reconnection: true, // Enable reconnection
+    reconnectionDelay: 1000, // Initial delay before attempting to reconnect (milliseconds)
+    reconnectionAttempts: Infinity, // Number of reconnection attempts (-1 for infinite)
+  });
+
+  useEffect(() => {
+    // Join the room upon connecting
+    socket.emit("joinStory", storyId);
+
+    // Event handlers
+    socket.on("connect", () => {
+      console.log("Connected to the server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from the server");
+    });
+
+    // Event handler for "dataChanged" event
+    socket.on("dataChanged", (data: { message: Message }) => {
+      setMessages((prevMsg) => {
+        const index = prevMsg.findIndex(
+          (message) => message._id === data.message._id
+        );
+        prevMsg[index >= 0 ? index : prevMsg.length] = data.message;
+        return prevMsg;
+      });
+      setSocketTriggered((prev) => !prev);
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      socket.disconnect();
+    };
+  }, [socket, storyId]);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -116,7 +155,7 @@ const GameComponent: React.FC = () => {
           player: currentPlayer._id,
           content: inputText,
         })
-        .then((response) => {
+        .then(async (response) => {
           const message = response.data;
           const newMessage: Message = {
             _id: message._id,
@@ -124,11 +163,15 @@ const GameComponent: React.FC = () => {
             content: inputText,
           };
 
-          setMessages((prevMessages) => [...prevMessages, newMessage]);
+          await setMessages((prevMessages) => [...prevMessages, newMessage]);
           setInputText("");
           setEditingMessageId(null);
+          socket.emit("addOrModifyData", {
+            storyId,
+            message: newMessage,
+          });
           // Handle the successful response, if needed
-          console.log("Message created successfully:", response.data);
+          console.log("Message created successfully");
           // You can also call the onSubmit function passed as a prop to handle the state in your parent component
         })
         .catch((error) => {
@@ -170,7 +213,7 @@ const GameComponent: React.FC = () => {
             )
             .then((response) => {
               // Handle the successful response, if needed
-              console.log("Message edited successfully:", response.data);
+              console.log("Message edited successfully");
               const updatedMessages = messages.map((message) =>
                 message._id === response.data._id
                   ? { ...message, content: response.data.content }
@@ -179,6 +222,10 @@ const GameComponent: React.FC = () => {
               setMessages(updatedMessages);
               setInputText("");
               setEditingMessageId(null);
+              socket.emit("addOrModifyData", {
+                storyId,
+                message: response.data,
+              });
 
               // You can also call the onSubmit function passed as a prop to handle the state in your parent component
             })
@@ -211,14 +258,17 @@ const GameComponent: React.FC = () => {
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
     }
-  }, [messages, editingMessageId]);
+  }, [messages, editingMessageId, socketTriggered]);
 
   return (
     <div
       className="nav dark:bg-[#00000080] bg-[#ffffff90] flex flex-col w-full sm:w-10/12 md:w-8/12 lg:w-8/12 xl:w-6/12 mx-auto"
       style={{ height: "calc(100vh - 144px)" }}
     >
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2">
+      <div
+        ref={messagesContainerRef}
+        className={`flex-1 overflow-y-auto p-2 ${socketTriggered}`}
+      >
         {messages.map((message, index) => (
           <div
             key={message._id}
