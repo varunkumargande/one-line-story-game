@@ -2,13 +2,13 @@
 
 Welcome to our robust project structure designed with precision and clarity, consisting of two core elements:
 
-### Demo Recordings
+### Demo Recordings, Please Watch
 
-[Product Demo (Part 1)](https://drive.google.com/file/d/1J0F73HZRcWG6H5mntU9tM-YaFKKrFizW/view?usp=drive_link)
+[Product Demo (Part 1) Video](https://drive.google.com/file/d/1J0F73HZRcWG6H5mntU9tM-YaFKKrFizW/view?usp=drive_link)
 
-[Mobile Responsive Product Demo (Part 2)](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
+[Mobile Responsive Product Demo (Part 2) Video](https://drive.google.com/file/d/1uJsXshPD4N_cO-0H-p4kNk1jRVNnobRc/view?usp=drive_link)
 
-[Web Sockets (only works in local asap) and Stories filter Demo (Part 3)](https://drive.google.com/file/d/1EGXIbT8HPtWJwqtlagDBhs6X4fxwtilA/view)
+[Web Sockets (only works in local asap) and Stories filter Demo (Part 3) Video](https://drive.google.com/file/d/1EGXIbT8HPtWJwqtlagDBhs6X4fxwtilA/view)
 
 [Seo Implemented Sample Image](https://drive.google.com/file/d/1Xrr3Ej4j4jD9ZlZqdqcGdkrin4T8LRCs/view?usp=drive_link)
 
