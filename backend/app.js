@@ -8,7 +8,6 @@ const cors = require("cors");
 
 const app = express();
 const PORT = 8000;
-const WEBSOCKET_PORT = 8001;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -66,9 +65,8 @@ io.on("connection", (socket) => {
 mongoose
   .connect(process.env.MONGODB_URI)
   .then((result) => {
-    app.listen(PORT);
-    io.listen(WEBSOCKET_PORT, () => {
-      console.log(`WebSocket server listening on port ${WEBSOCKET_PORT}`);
+    server.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
     });
   })
   .catch((err) => {
