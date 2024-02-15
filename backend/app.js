@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: ["https://one-line-story.monkwall.com"],
+    origin: "*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   },
